@@ -1,0 +1,214 @@
+# Query: $
+# ContextLines: 1
+
+63 results - 17 files
+
+ai-finance-platform\components.json:
+  1  {
+  2:   "$schema": "https://ui.shadcn.com/schema.json",
+  3    "style": "new-york",
+
+ai-finance-platform\actions\account.js:
+  80      // Delete transactions and update account balances in a transaction
+  81:     await db.₹transaction(async (tx) => {
+  82        // Delete transactions
+
+ai-finance-platform\actions\seed.js:
+   64            amount,
+   65:           description: `${
+   66              type === "INCOME" ? "Received" : "Paid for"
+   67:           } ${category}`,
+   68            date,
+
+   82      // Insert transactions in batches and update account balance
+   83:     await db.₹transaction(async (tx) => {
+   84        // Clear existing transactions
+
+  102        success: true,
+  103:       message: `Created ${transactions.length} transactions`,
+  104      };
+
+ai-finance-platform\actions\transaction.js:
+   72      // Create transaction and update account balance
+   73:     const transaction = await db.₹transaction(async (tx) => {
+   74        const newTransaction = await tx.transaction.create({
+
+   93      revalidatePath("/dashboard");
+   94:     revalidatePath(`/account/${transaction.accountId}`);
+   95  
+
+  159      // Update transaction and account balance in a transaction
+  160:     const transaction = await db.₹transaction(async (tx) => {
+  161        const updated = await tx.transaction.update({
+
+  188      revalidatePath("/dashboard");
+  189:     revalidatePath(`/account/${data.accountId}`);
+  190  
+
+ai-finance-platform\app\layout.js:
+  20          </head>
+  21:         <body className={`${inter.className}`}>
+  22            <Header />
+
+ai-finance-platform\app\(main)\account\_components\account-chart.jsx:
+  101              <p className="text-lg font-bold text-green-500">
+  102:               ₹{totals.income.toFixed(2)}
+  103              </p>
+
+  107              <p className="text-lg font-bold text-red-500">
+  108:               ₹{totals.expense.toFixed(2)}
+  109              </p>
+
+  113              <p
+  114:               className={`text-lg font-bold ${
+  115                  totals.income - totals.expense >= 0
+
+  119              >
+  120:               ₹{(totals.income - totals.expense).toFixed(2)}
+  121              </p>
+
+  140                  axisLine={false}
+  141:                 tickFormatter={(value) => `₹${value}`}
+  142                />
+  143                <Tooltip
+  144:                 formatter={(value) => [`₹${value}`, undefined]}
+  145                  contentStyle={{
+
+ai-finance-platform\app\(main)\account\_components\no-pagination-transaction-table.jsx:
+  155        !window.confirm(
+  156:         `Are you sure you want to delete ${selectedIds.length} transactions?`
+  157        )
+
+  348                    >
+  349:                     {transaction.type === "EXPENSE" ? "-" : "+"}₹
+  350                      {transaction.amount.toFixed(2)}
+
+  399                              router.push(
+  400:                               `/transaction/create?edit=${transaction.id}`
+  401                              )
+
+ai-finance-platform\app\(main)\account\_components\transaction-table.jsx:
+  172        !window.confirm(
+  173:         `Are you sure you want to delete ${selectedIds.length} transactions?`
+  174        )
+
+  379                    >
+  380:                     {transaction.type === "EXPENSE" ? "-" : "+"}₹
+  381                      {transaction.amount.toFixed(2)}
+
+  430                              router.push(
+  431:                               `/transaction/create?edit=${transaction.id}`
+  432                              )
+
+ai-finance-platform\app\(main)\dashboard\_components\account-card.jsx:
+  53      <Card className="hover:shadow-md transition-shadow group relative">
+  54:       <Link href={`/account/${id}`}>
+  55          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+
+ai-finance-platform\app\(main)\dashboard\_components\budget-progress.jsx:
+  105                    {initialBudget
+  106:                     ? `₹${currentExpenses.toFixed(
+  107                          2
+  108:                       )} of ₹${initialBudget.amount.toFixed(2)} spent`
+  109                      : "No budget set"}
+
+  128                value={percentUsed}
+  129:               extraStyles={`${
+  130                  // add to Progress component
+
+ai-finance-platform\app\(main)\dashboard\_components\transaction-overview.jsx:
+  169                      dataKey="value"
+  170:                     label={({ name, value }) => `${name}: ₹${value.toFixed(2)}`}
+  171                    >
+
+  173                        <Cell
+  174:                         key={`cell-${index}`}
+  175                          fill={COLORS[index % COLORS.length]}
+
+  179                    <Tooltip
+  180:                     formatter={(value) => `₹${value.toFixed(2)}`}
+  181                      contentStyle={{
+
+ai-finance-platform\app\(main)\transaction\_components\transaction-form.jsx:
+  118        reset();
+  119:       router.push(`/account/${transactionResult.data.accountId}`);
+  120      }
+
+ai-finance-platform\components\ui\progress.jsx:
+  18        <ProgressPrimitive.Indicator
+  19:         className={`h-full w-full flex-1 bg-primary transition-all ${extraStyles}`}
+  20:         style={{ transform: `translateX(-${100 - (value || 0)}%)` }}
+  21        />
+
+ai-finance-platform\data\landing.js:
+  16    {
+  17:     value: "$2B+",
+  18      label: "Transactions Tracked",
+
+ai-finance-platform\emails\template.jsx:
+   70                  <Text style={styles.text}>Total Income</Text>
+   71:                 <Text style={styles.heading}>₹{data?.stats.totalIncome}</Text>
+   72                </div>
+
+   74                  <Text style={styles.text}>Total Expenses</Text>
+   75:                 <Text style={styles.heading}>₹{data?.stats.totalExpenses}</Text>
+   76                </div>
+
+   79                  <Text style={styles.heading}>
+   80:                   ₹{data?.stats.totalIncome - data?.stats.totalExpenses}
+   81                  </Text>
+
+   92                        <Text style={styles.text}>{category}</Text>
+   93:                       <Text style={styles.text}>₹{amount}</Text>
+   94                      </div>
+
+  137                  <Text style={styles.text}>Budget Amount</Text>
+  138:                 <Text style={styles.heading}>₹{data?.budgetAmount}</Text>
+  139                </div>
+
+  141                  <Text style={styles.text}>Spent So Far</Text>
+  142:                 <Text style={styles.heading}>₹{data?.totalExpenses}</Text>
+  143                </div>
+
+  146                  <Text style={styles.heading}>
+  147:                   ₹{data?.budgetAmount - data?.totalExpenses}
+  148                  </Text>
+
+ai-finance-platform\lib\checkUser.js:
+  21  
+  22:     const name = `${user.firstName} ${user.lastName}`;
+  23  
+
+ai-finance-platform\lib\inngest\function.js:
+   39        // Create new transaction and update account balance in a transaction
+   40:       await db.₹transaction(async (tx) => {
+   41          // Create new transaction
+
+   45              amount: transaction.amount,
+   46:             description: `${transaction.description} (Recurring)`,
+   47              date: new Date(),
+
+  137  
+  138:     Financial Data for ${month}:
+  139:     - Total Income: ₹${stats.totalIncome}
+  140:     - Total Expenses: ₹${stats.totalExpenses}
+  141:     - Net Income: ₹${stats.totalIncome - stats.totalExpenses}
+  142:     - Expense Categories: ${Object.entries(stats.byCategory)
+  143:       .map(([category, amount]) => `${category}: ₹${amount}`)
+  144        .join(", ")}
+
+  180      for (const user of users) {
+  181:       await step.run(`generate-report-${user.id}`, async () => {
+  182          const lastMonth = new Date();
+
+  194            to: user.email,
+  195:           subject: `Your Monthly Financial Report - ${monthName}`,
+  196            react: EmailTemplate({
+
+  237  
+  238:       await step.run(`check-budget-${budget.id}`, async () => {
+  239          const startDate = new Date();
+
+  268              to: budget.user.email,
+  269:             subject: `Budget Alert for ${defaultAccount.name}`,
+  270              react: EmailTemplate({
